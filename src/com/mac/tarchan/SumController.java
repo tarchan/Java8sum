@@ -25,10 +25,12 @@ package com.mac.tarchan;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 /**
  * SumController
@@ -37,17 +39,25 @@ import javafx.scene.control.Label;
  */
 public class SumController implements Initializable {
     
+    private static final Logger log = Logger.getLogger(SumController.class.getName());
     @FXML
     private Label label;
-    
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
+    private TextField startTime;
+    @FXML
+    private TextField endTime;
+    @FXML
+    private TextField restTime;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void onSum(ActionEvent event) {
+        log.info("開始時刻: " + startTime.getText());
+        log.info("終了時刻: " + endTime.getText());
+        log.info("休憩時間: " + restTime.getText());
+    }
 }

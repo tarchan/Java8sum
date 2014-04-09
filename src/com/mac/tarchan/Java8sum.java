@@ -36,6 +36,11 @@ import javafx.stage.Stage;
  */
 public class Java8sum extends Application {
     
+    static {
+        // LTSVフォーマットに変更
+        System.setProperty("java.util.logging.SimpleFormatter.format", "time:%1$tT\tmethod:%2$s\tlevel:%4$s\tmessage:%5$s\tthrown:%6$s%n");
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Sum.fxml"));

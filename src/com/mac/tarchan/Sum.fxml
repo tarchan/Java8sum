@@ -6,9 +6,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mac.tarchan.SumController">
-    <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="100.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.mac.tarchan.SumController">
+  <children>
+    <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="41.0" prefWidth="372.0" spacing="20.0">
+      <children>
+        <TextField fx:id="startTime" prefWidth="74.0" promptText="開始時刻" text="" />
+        <TextField id="endTIme" fx:id="endTime" prefWidth="74.0" promptText="終了時刻" text="" />
+        <TextField fx:id="restTime" prefWidth="74.0" promptText="休憩時間" text="" />
+        <Button id="button" onAction="#onSum" text="合計" />
+      </children>
+    </HBox>
+    <Label fx:id="label" layoutX="14.0" layoutY="14.0" minHeight="16.0" minWidth="69.0" text="勤務時間計算" />
+  </children>
 </AnchorPane>
