@@ -10,9 +10,9 @@
   <children>
     <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="41.0" prefWidth="372.0" spacing="20.0">
       <children>
-        <TextField fx:id="startTime" prefWidth="74.0" promptText="開始時刻" text="" />
-        <TextField id="endTIme" fx:id="endTime" prefWidth="74.0" promptText="終了時刻" text="" />
-        <TextField fx:id="restTime" prefWidth="74.0" promptText="休憩時間" text="" />
+        <TextField fx:id="startTime" prefWidth="74.0" promptText="開始時刻" text="09:00" />
+        <TextField id="endTIme" fx:id="endTime" prefWidth="74.0" promptText="終了時刻" text="17:00" />
+        <TextField fx:id="restTime" prefWidth="74.0" promptText="休憩時間" text="00:30" />
         <Button id="button" onAction="#onSum" text="合計" />
       </children>
     </HBox>

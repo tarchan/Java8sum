@@ -24,6 +24,9 @@
 package com.mac.tarchan;
 
 import java.net.URL;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -56,8 +59,14 @@ public class SumController implements Initializable {
 
     @FXML
     private void onSum(ActionEvent event) {
-        log.info("開始時刻: " + startTime.getText());
-        log.info("終了時刻: " + endTime.getText());
-        log.info("休憩時間: " + restTime.getText());
+        LocalTime a = LocalTime.parse(startTime.getText());
+        LocalTime b = LocalTime.parse(endTime.getText());
+//        Duration c = Duration.ofSeconds(LocalTime.parse(restTime.getText()).toSecondOfDay());
+        Duration c = Duration.between(LocalTime.MIN, LocalTime.parse(restTime.getText()));
+        Duration d = Duration.between(a, b).minus(c);
+        log.info("開始時刻: " + a);
+        log.info("終了時刻: " + b);
+        log.info("休憩時間: " + c);
+        log.info("勤務時間: " + d.toMinutes() / 60.0);
     }
 }
