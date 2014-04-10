@@ -23,17 +23,25 @@
  */
 package com.mac.tarchan;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * SumController
@@ -43,8 +51,8 @@ import javafx.scene.control.TextField;
 public class SumController implements Initializable {
     
     private static final Logger log = Logger.getLogger(SumController.class.getName());
-    @FXML
-    private Label label;
+    private Stage resultDialog;
+    private ResultController result;
     @FXML
     private TextField startTime;
     @FXML
@@ -54,8 +62,19 @@ public class SumController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        try {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("Result.fxml"));
+            fxml.load();
+            Parent root = fxml.getRoot();
+            result = fxml.getController();
+            resultDialog = new Stage();
+            resultDialog.initModality(Modality.WINDOW_MODAL);
+            resultDialog.setTitle("結果");
+            resultDialog.setScene(new Scene(root));
+        } catch (IOException ex) {
+            log.log(Level.SEVERE, "FXMLを読み込めません。", ex);
+        }
+    }
 
     @FXML
     private void onSum(ActionEvent event) {
@@ -68,5 +87,8 @@ public class SumController implements Initializable {
         log.info("終了時刻: " + b);
         log.info("休憩時間: " + c);
         log.info("勤務時間: " + d.toMinutes() / 60.0);
+        result.textProperty().set("" + d.toMinutes() / 60.0);
+        resultDialog.showAndWait();
+        log.info("閉じた？");
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="100.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.mac.tarchan.ResultController">
+  <children>
+    <HBox id="HBox" alignment="CENTER" layoutX="51.0" layoutY="25.0" spacing="5.0">
+      <children>
+        <Label text="あなたの勤務時間は" />
+        <Label fx:id="timeLabel" text="99.99" />
+        <Label text="時間です！" />
+      </children>
+    </HBox>
+    <Button id="okButton" layoutX="113.0" layoutY="67.0" minWidth="75.0" mnemonicParsing="false" onAction="#onOk" text="OK" />
+  </children>
+</AnchorPane>

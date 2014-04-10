@@ -16,6 +16,6 @@
         <Button id="button" onAction="#onSum" text="合計" />
       </children>
     </HBox>
-    <Label fx:id="label" layoutX="14.0" layoutY="14.0" minHeight="16.0" minWidth="69.0" text="勤務時間計算" />
+    <Label id="label" layoutX="14.0" layoutY="14.0" minHeight="16.0" minWidth="69.0" text="勤務時間計算" />
   </children>
 </AnchorPane>
