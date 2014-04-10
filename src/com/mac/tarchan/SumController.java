@@ -37,9 +37,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -51,6 +49,7 @@ import javafx.stage.Stage;
 public class SumController implements Initializable {
     
     private static final Logger log = Logger.getLogger(SumController.class.getName());
+    private final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("H:m");
     private Stage resultDialog;
     private ResultController result;
     @FXML
@@ -76,19 +75,32 @@ public class SumController implements Initializable {
         }
     }
 
+    private LocalTime parseTime(String str) {
+        try {
+            LocalTime local = LocalTime.parse(str, TIME_FORMAT);
+            return local;
+        } catch (RuntimeException ex) {
+            throw new RuntimeException("入力が不正です。: " + str, ex);
+        }
+    }
+
     @FXML
     private void onSum(ActionEvent event) {
-        LocalTime a = LocalTime.parse(startTime.getText());
-        LocalTime b = LocalTime.parse(endTime.getText());
-//        Duration c = Duration.ofSeconds(LocalTime.parse(restTime.getText()).toSecondOfDay());
-        Duration c = Duration.between(LocalTime.MIN, LocalTime.parse(restTime.getText()));
-        Duration d = Duration.between(a, b).minus(c);
-        log.info("開始時刻: " + a);
-        log.info("終了時刻: " + b);
-        log.info("休憩時間: " + c);
-        log.info("勤務時間: " + d.toMinutes() / 60.0);
-        result.textProperty().set("" + d.toMinutes() / 60.0);
-        resultDialog.showAndWait();
-        log.info("閉じた？");
+        try {
+            LocalTime a = parseTime(startTime.getText());
+            LocalTime b = parseTime(endTime.getText());
+//            Duration c = Duration.ofSeconds(LocalTime.parse(restTime.getText()).toSecondOfDay());
+            Duration c = Duration.between(LocalTime.MIN, parseTime(restTime.getText()));
+            Duration d = Duration.between(a, b).minus(c);
+            log.info("開始時刻: " + a);
+            log.info("終了時刻: " + b);
+            log.info("休憩時間: " + c);
+            log.info("勤務時間: " + d.toMinutes() / 60.0);
+            result.textProperty().set("" + d.toMinutes() / 60.0);
+            resultDialog.showAndWait();
+            log.info("閉じた？");
+        } catch (RuntimeException ex) {
+            log.log(Level.SEVERE, "入力が不正です。", ex);
+        }
     }
 }
